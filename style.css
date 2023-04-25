@@ -1,0 +1,90 @@
+body {
+    text-align: center;
+    background-image: url("./images/poker-background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.players {
+    display: inline-block;
+    border: 2px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 10px;
+}
+
+.card {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.card-image {
+    height: 150px;
+    width: auto;
+}
+
+.highestCard {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.result-container {
+    display: flex;
+    align-items: first baseline;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+@media only screen and (min-width: 600px) {
+    .card-image {
+        height: 200px;
+        width: auto;
+    }
+
+    .card {
+        margin: 5px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card-image {
+        height: 250px;
+        width: auto;
+    }
+
+    .card {
+        margin: 5px;
+    }
+
+    section{
+        display: block;
+    }
+
+} 

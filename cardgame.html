@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Card Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Card Game</h1>
+    <section>
+      <div id="Suresh" class="players">
+        <h1>Player 1</h1>
+        <h4 id="player-name-1">name : Suresh</h4>
+
+        <div data-card="ACE-SPADE" id="player1-card1" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+        <div data-card="FIVE-DIAMOND" id="player1-card2" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+        <div data-card="NINE-HEART" id="player1-card3" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+
+        <div id="player1-button" class="highestCard">Show Highest Card</div>
+
+        <div class="result-container" id="player1-result">
+          <div style="display: inline-block">
+            <bold>Highest Card</bold>
+
+            <div
+              class="highest-card"
+              id="player1-highest"
+              style="margin: 10px"
+            ></div>
+          </div>
+          <div id="player1-score" style="display: inline-block"></div>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------------------------->
+
+      <div id="Ramesh" class="players">
+        <h1>Player 2</h1>
+        <h4 id="player-name-1">name : Ramesh</h4>
+
+        <div data-card="TEN-SPADE" id="player2-card1" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+        <div data-card="ACE-CLUB" id="player2-card2" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+        <div data-card="JACK-DIAMOND" id="player2-card3" class="card">
+          <img src="./images/card-back.png" class="card-image" />
+        </div>
+
+        <div id="player2-button" class="highestCard">Show Highest Card</div>
+
+        <div class="result-container" id="player2-result">
+          <div style="display: inline-block">
+            <bold>Highest Card</bold>
+
+            <div
+              class="highest-card"
+              id="player2-highest"
+              style="margin: 10px"
+            ></div>
+          </div>
+          <div id="player2-score" style="display: inline-block"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="winner-container">
+      <button class="winner">Decide Winner</button>
+    </div>
+  </body>
+
+  <script>
+    $(document).ready(function () {
+      $(".result-container").hide();
+
+      let pscore1 = 0;
+      let pscore2 = 0;
+
+      let count1 = 0;
+      let count2 = 0;
+      let openedcard = {};
+      let p1card;
+      let p2card;
+      $(
+        "#player1-card1 , #player1-card2, #player1-card3, #player2-card1, #player2-card2, #player2-card3"
+      ).click(function () {
+        let card = $(this).attr("data-card").split("-");
+
+        if (!openedcard[card]) {
+          $(this).html(
+            `<img src='./images/${card[1]}/${card[0]}.png' class='card-image'>`
+          );
+
+          let score = 0;
+          if (card[1] == "SPADE") {
+            score += 3;
+            if (card[0] == "TW0") score += 0;
+            else if (card[0] == "THREE") score += 1;
+            else if (card[0] == "FOUR") score += 2;
+            else if (card[0] == "FIVE") score += 3;
+            else if (card[0] == "SIX") score += 4;
+            else if (card[0] == "SEVEN") score += 5;
+            else if (card[0] == "EIGHT") score += 6;
+            else if (card[0] == "NINE") score += 7;
+            else if (card[0] == "TEN") score += 8;
+            else if (card[0] == "JACK") score += 9;
+            else if (card[0] == "QUEEN") score += 10;
+            else if (card[0] == "KING") score += 11;
+            else if (card[0] == "ACE") score += 12;
+          } else if (card[1] == "CLUB") {
+            score += 0;
+            if (card[0] == "TW0") score += 0;
+            else if (card[0] == "THREE") score += 1;
+            else if (card[0] == "FOUR") score += 2;
+            else if (card[0] == "FIVE") score += 3;
+            else if (card[0] == "SIX") score += 4;
+            else if (card[0] == "SEVEN") score += 5;
+            else if (card[0] == "EIGHT") score += 6;
+            else if (card[0] == "NINE") score += 7;
+            else if (card[0] == "TEN") score += 8;
+            else if (card[0] == "JACK") score += 9;
+            else if (card[0] == "QUEEN") score += 10;
+            else if (card[0] == "KING") score += 11;
+            else if (card[0] == "ACE") score += 12;
+          } else if (card[1] == "HEART") {
+            score += 2;
+            if (card[0] == "TW0") score += 0;
+            else if (card[0] == "THREE") score += 1;
+            else if (card[0] == "FOUR") score += 2;
+            else if (card[0] == "FIVE") score += 3;
+            else if (card[0] == "SIX") score += 4;
+            else if (card[0] == "SEVEN") score += 5;
+            else if (card[0] == "EIGHT") score += 6;
+            else if (card[0] == "NINE") score += 7;
+            else if (card[0] == "TEN") score += 8;
+            else if (card[0] == "JACK") score += 9;
+            else if (card[0] == "QUEEN") score += 10;
+            else if (card[0] == "KING") score += 11;
+            else if (card[0] == "ACE") score += 12;
+          } else if (card[1] == "DIAMOND") {
+            score += 1;
+            if (card[0] == "TW0") score += 0;
+            else if (card[0] == "THREE") score += 1;
+            else if (card[0] == "FOUR") score += 2;
+            else if (card[0] == "FIVE") score += 3;
+            else if (card[0] == "SIX") score += 4;
+            else if (card[0] == "SEVEN") score += 5;
+            else if (card[0] == "EIGHT") score += 6;
+            else if (card[0] == "NINE") score += 7;
+            else if (card[0] == "TEN") score += 8;
+            else if (card[0] == "JACK") score += 9;
+            else if (card[0] == "QUEEN") score += 10;
+            else if (card[0] == "KING") score += 11;
+            else if (card[0] == "ACE") score += 12;
+          }
+
+          if ($(this).attr("id").split("-")[0] == "player1") {
+            pscore1 = Math.max(pscore1, score);
+            if (pscore1 == score) p1card = card;
+            count1++;
+          } else {
+            pscore2 = Math.max(pscore2, score);
+            if (pscore2 == score) p2card = card;
+            count2++;
+          }
+          openedcard[card] = true;
+        }
+      });
+
+      let decidewinner = 0;
+
+      $("#player1-button").click(function () {
+        if (count1 == 3) {
+          $("#player1-result").show();
+          $("#player1-score").html(pscore1);
+          $("#player1-highest").html(
+            `<img src='./images/${p1card[1]}/${p1card[0]}.png' class='card-image'>`
+          );
+          decidewinner++;
+          
+        }
+      });
+
+      $("#player2-button").click(function () {
+        if (count2 == 3) {
+          $("#player2-result").show();
+          $("#player2-score").html(pscore2);
+          $("#player2-highest").html(
+            `<img src='./images/${p2card[1]}/${p2card[0]}.png' class='card-image'>`
+          );
+          decidewinner++;
+
+        }
+      });
+
+      $(".winner").click(function () {
+
+        if (decidewinner >= 2) {
+          let name, score, card;
+
+          if (pscore1 >= pscore2) {
+            name = "Suresh";
+            score = pscore1;
+            card = p1card;
+          } else {
+            name = "Ramesh";
+            score = pscore2;
+            card = p2card;
+          }
+
+          $(".winner-container").html(`<h2>Winner is : ${name}</h2> 
+          <h2>Score : ${score} </h2>
+
+            <div>
+                <div style="display: inline-block; ">
+
+                    <div class="highest-card" style="margin: 10px;">
+                        <img src='./images/${card[1]}/${card[0]}.png' class='card-image'>
+                    </div>
+                </div>
+            </div>
+            
+            `);
+        }
+      });
+    });
+  </script>
+</html>
