@@ -1,8 +1,6 @@
 body {
     text-align: center;
-    background-image: url("./images/poker-background.jpg");
-    background-size: cover;
-    background-attachment: fixed;
+    background-color: #4caf50;
 }
 
 section {
@@ -49,7 +47,7 @@ section {
 }
 
 button {
-    background-color: #4caf50;
+    background-color: #cc00ff;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -83,8 +81,8 @@ button {
         margin: 5px;
     }
 
-    section{
+    section {
         display: block;
     }
 
-} 
+}
